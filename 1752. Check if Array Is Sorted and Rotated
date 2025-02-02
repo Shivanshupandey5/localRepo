@@ -1,0 +1,47 @@
+1752. Check if Array Is Sorted and Rotated
+
+Using a Flag and rotation 
+class Solution {
+
+    public boolean check(int[] nums) {
+        int n = nums.length;
+        if(n <= 1)
+        return true;
+
+        int inversionCount=0;
+        for(int i=1;i<n;i++){
+            if(nums[i] < nums[i-1])
+                inversionCount++;
+        }
+
+        if(nums[0] < nums[n-1])
+            inversionCount++;
+
+        return inversionCount <= 1;
+    }
+}
+
+Using Sorting Algo
+//class Solution {
+
+//     public boolean check(int[] nums) {
+
+//         int n = nums.length;
+//         int[] sortedArr = nums.clone();
+//         Arrays.sort(sortedArr);
+
+//         for(int i = 0; i<n;i++){
+//             boolean isMatch = true;
+//             for(int j = 0; j < n; j++){
+//                 if(nums[(i+j)%n] != sortedArr[j]){
+//                     isMatch = false;
+//                     break;
+//                 }
+//             }
+//             if(isMatch)
+//                 return true;
+//         }
+
+//         return false;
+//     }
+// }
