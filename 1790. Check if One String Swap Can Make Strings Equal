@@ -1,0 +1,103 @@
+1790. Check if One String Swap Can Make Strings Equal
+
+
+
+Using Two Arrays
+class Solution {
+
+    public boolean areAlmostEqual(String s1, String s2) {
+        if(s1.equals(s2))
+            return true;
+        
+        char[] s1Freq = new char[26];
+        char[] s2Freq = new char[26];
+        int numDiff = 0;
+
+        for(int i=0;i<s1.length();i++){
+            char ch1 = s1.charAt(i);
+            char ch2 = s2.charAt(i);
+
+            if(ch1 != ch2)
+                numDiff++;
+            
+            if(numDiff > 2)
+                return false;
+            
+            s1Freq[ch1 - 'a']++;
+            s2Freq[ch2 - 'a']++;
+        }
+
+
+    return Arrays.equals(s1Freq,s2Freq);
+    }
+
+}
+
+
+
+
+Using Two pointer
+class Solution {
+
+    public boolean areAlmostEqual(String s1, String s2) {
+        int firstIdxDiff = 0;
+        int secondIdxDiff = 0;
+        int maxDiff = 0;
+
+        for(int i=0;i<s1.length();i++){
+            if(s1.charAt(i) != s2.charAt(i)){
+                maxDiff++;
+
+                if(maxDiff == 1){
+                    firstIdxDiff = i;
+                }else if(maxDiff == 2)
+                    secondIdxDiff =  i;
+                else 
+                    return false;
+            }
+        }
+
+        return s1.charAt(firstIdxDiff)==(s2.charAt(secondIdxDiff)) &&
+            s1.charAt(secondIdxDiff)==(s2.charAt(firstIdxDiff));
+    }
+}
+
+
+
+
+
+
+
+Using Both above logic 
+class Solution {
+
+    public boolean areAlmostEqual(String s1, String s2) {
+
+        if(s1.equals(s2))
+            return true;
+        
+        int[] misMatchIdx = new int[2];
+        int misMatchCount = 0;
+
+        for(int i=0;i<s1.length();i++){
+            if(s1.charAt(i) != s2.charAt(i)){
+                if(misMatchCount == 2)
+                    return false;
+                
+                misMatchIdx[misMatchCount] = i;
+                misMatchCount++;
+            }
+        }
+
+        if(misMatchCount == 2){
+            int i = misMatchIdx[0];
+            int j = misMatchIdx[1];
+
+            if(s1.charAt(i) == s2.charAt(j) && s1.charAt(j) == s2.charAt(i))
+                return true;
+        }
+
+        return false;
+    }
+
+}
