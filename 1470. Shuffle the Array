@@ -1,0 +1,18 @@
+1470. Shuffle the Array
+
+class Solution {
+    public int[] shuffle(int[] nums, int n) {
+
+        int start = 0;
+        int idx = 0;
+
+        int[] ans = new int[nums.length];
+
+        while(n < nums.length){
+            ans[idx++] = nums[start++];
+            ans[idx++] = nums[n++];
+        }
+
+        return ans;
+    }
+}
