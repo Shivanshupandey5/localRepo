@@ -1,0 +1,18 @@
+class Solution {
+    public int findNumbers(int[] nums) {
+        int count=0;
+        for(int num : nums){
+            // System.out.println("arr num = "+num);
+            int evenCount = 0;
+            while(num > 0){
+                evenCount++;
+                // System.out.println("evenCount = "+evenCount);
+                num /= 10;
+                // System.out.println("num = "+num);
+            }
+                if(evenCount % 2 == 0)
+                    count++;
+        }
+        return count;
+    }
+}
